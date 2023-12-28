@@ -1,0 +1,22 @@
+{
+  "name": "trevor-contracts",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "forge build",
+    "clean": "rm -rf cache out",
+    "lint": "pnpm lint:sol && pnpm prettier:check",
+    "lint:sol": "forge fmt --check && pnpm solhint {script,src,test}/**/*.sol",
+    "prettier:check": "prettier --check **/*.{json,md,yml} --ignore-path=.prettierignore",
+    "prettier:write": "prettier --write **/*.{json,md,yml} --ignore-path=.prettierignore",
+    "test": "forge test",
+    "test:coverage": "forge coverage",
+    "test:coverage:report": "forge coverage --report lcov && genhtml lcov.info --branch-coverage --output-dir coverage"
+  },
+  "devDependencies": {
+    "@prb/test": "^0.6.4",
+    "forge-std": "github:foundry-rs/forge-std#v1.7.4",
+    "prettier": "^3.1.1",
+    "solhint": "^4.0.0"
+  }
+}
