@@ -1,0 +1,92 @@
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.20;
+
+import { TestBase } from "./utils/TestBase.sol";
+import { Signature, StakingERC721, WithdrawRequest } from "../src/tools/StakingERC721.sol";
+import { ERC721Consumer } from "../src/mocks/ERC721Consumer.sol";
+
+contract StakingERC721Test is TestBase {
+    StakingERC721 internal staking;
+    ERC721Consumer internal consumer;
+
+    function setUp() public {
+        staking = new StakingERC721();
+        consumer = new ERC721Consumer();
+
+        staking.initialize();
+        consumer.initialize();
+
+        consumer.setWorldAddress(address(staking));
+        consumer.mintArbitrary(deployer, 20);
+    }
+
+    function testDepositsAndWithdraws2000TokensFromWorld() public {
+        consumer.setApprovalForAll(address(staking), true);
+        assertEq(20, consumer.balanceOf(deployer));
+        uint256[] memory _ids = getIds();
+        staking.depositERC721(address(consumer), deployer, _ids);
+
+        assertEq(0, consumer.balanceOf(deployer));
+
+        WithdrawRequest[] memory _req = new WithdrawRequest[](20);
+        for (uint256 i = 0; i < _ids.length; i++) {
+            _req[i] = WithdrawRequest({
+                tokenAddress: address(consumer),
+                reciever: deployer,
+                tokenId: i,
+                nonce: 0,
+                stored: true,
+                signature: Signature(0, 0x0, 0x0)
+            });
+        }
+        staking.withdrawERC721(_req);
+
+        assertEq(20, consumer.balanceOf(deployer));
+    }
+
+    function testAllowTrustedWithdraw() public {
+        (address _addr, uint256 _pk) = makeAddrAndKey("trustedSigner");
+        consumer.setAdmin(_addr, true);
+
+        WithdrawRequest[] memory _req = new WithdrawRequest[](10);
+        for (uint256 i = 0; i < 10; i++) {
+            uint256 _tokenId = i + 20; // offset from initial 20 minted
+            (uint8 _v, bytes32 _r, bytes32 _s) =
+                signHashEthVRS(_pk, toSigHash(_tokenId, address(consumer), _tokenId, deployer));
+
+            _req[i] = WithdrawRequest({
+                tokenAddress: address(consumer),
+                reciever: deployer,
+                tokenId: _tokenId,
+                nonce: _tokenId,
+                stored: false,
+                signature: Signature(_v, _r, _s)
+            });
+        }
+
+        staking.withdrawERC721(_req);
+        assertEq(30, consumer.balanceOf(deployer));
+    }
+
+    function getIds() internal pure returns (uint256[] memory) {
+        uint256[] memory _ids = new uint256[](20);
+        for (uint256 i = 0; i < 20; i++) {
+            _ids[i] = i;
+        }
+
+        return _ids;
+    }
+
+    function toSigHash(
+        uint256 _nonce,
+        address _token,
+        uint256 _tokenId,
+        address _recipient
+    )
+        internal
+        pure
+        returns (bytes32)
+    {
+        return keccak256(abi.encodePacked(_nonce, _token, _tokenId, _recipient));
+    }
+}
