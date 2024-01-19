@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.20;
+pragma solidity >=0.8.23;
 
 /**
  * @dev Info related to a specific organization. Think of organizations as systems/games.

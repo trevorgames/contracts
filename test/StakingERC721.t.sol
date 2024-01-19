@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.20;
+pragma solidity >=0.8.23;
 
 import { TestBase } from "./utils/TestBase.sol";
 import { Signature, StakingERC721, WithdrawRequest } from "../src/tools/StakingERC721.sol";
