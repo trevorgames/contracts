@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.23;
 
-import { Signature, StakingERC20, WithdrawRequest } from "../src/tools/StakingERC20.sol";
+import { Signature, StakingERC20, WithdrawRequest } from "../src/StakingERC20.sol";
 import { ERC20Consumer } from "../src/mocks/ERC20Consumer.sol";
 import { TestBase } from "./utils/TestBase.sol";
 

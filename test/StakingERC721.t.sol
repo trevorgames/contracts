@@ -2,7 +2,7 @@
 pragma solidity >=0.8.23;
 
 import { TestBase } from "./utils/TestBase.sol";
-import { Signature, StakingERC721, WithdrawRequest } from "../src/tools/StakingERC721.sol";
+import { Signature, StakingERC721, WithdrawRequest } from "../src/StakingERC721.sol";
 import { ERC721Consumer } from "../src/mocks/ERC721Consumer.sol";
 
 contract StakingERC721Test is TestBase {
