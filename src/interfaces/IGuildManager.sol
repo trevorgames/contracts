@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity >=0.8.23;
+pragma solidity ^0.8.0;
 
 /**
  * @dev Info related to a specific organization. Think of organizations as systems/games.
@@ -352,9 +352,9 @@ interface IGuildManager {
 
     /**
      * @dev Sets the trevor tag nft address
-     * @param _treasureTagNFTAddress The address of the trevor tag nft contract
+     * @param _trevorTagNFTAddress The address of the trevor tag nft contract
      */
-    function setTrevorTagNFTAddress(address _treasureTagNFTAddress) external;
+    function setTrevorTagNFTAddress(address _trevorTagNFTAddress) external;
 
     /**
      * @dev Retrieves the stored info for a given organization. Used to wrap the tuple from

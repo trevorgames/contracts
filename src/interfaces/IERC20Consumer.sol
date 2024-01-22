@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity >=0.8.23;
+pragma solidity ^0.8.0;
 
 interface IERC20Consumer {
     function mintFromWorld(address, uint256) external;
