@@ -4,4 +4,4 @@ forge-std/=node_modules/forge-std/
 @openzeppelin/contracts/=node_modules/@openzeppelin/contracts/
 @openzeppelin/contracts-upgradeable/=node_modules/@openzeppelin/contracts-upgradeable/
 @solidstate/contracts/=node_modules/@solidstate/contracts/
-@openzeppelin/contracts-diamond=node_modules/openzeppelin-contracts-diamond/contracts/
+@openzeppelin/contracts-diamond/=node_modules/openzeppelin-contracts-diamond/contracts/
