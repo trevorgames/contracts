@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@prb/test": "^0.6.4",
+    "@prb/math": "^4.0.2",
     "forge-std": "github:foundry-rs/forge-std#v1.7.4",
     "openzeppelin-contracts-diamond": "github:GeniusVentures/openzeppelin-contracts-diamond#v4.9.1",
     "prettier": "^3.1.1",
