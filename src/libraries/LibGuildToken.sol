@@ -72,6 +72,7 @@ library LibGuildToken {
 
     function _drawImage(string memory _data) private pure returns (string memory) {
         return string(
+            // solhint-disable max-line-length
             abi.encodePacked(
                 '<image x="0" y="0" width="64" height="64" image-rendering="pixelated" preserveAspectRatio="xMidYMid" xlink:href="data:image/png;base64,',
                 _data,
@@ -84,6 +85,7 @@ library LibGuildToken {
         string memory _svgString = string(abi.encodePacked(_drawImage(_data)));
 
         return string(
+            // solhint-disable max-line-length
             abi.encodePacked(
                 '<svg id="imageRender" width="100%" height="100%" version="1.1" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">',
                 _svgString,
