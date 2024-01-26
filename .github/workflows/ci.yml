@@ -83,6 +83,12 @@ jobs:
             echo $(($EPOCHSECONDS - $EPOCHSECONDS % 604800))
           )" >> $GITHUB_ENV
 
+      - uses: moonrepo/setup-rust@v0
+        with:
+          cache-target: release
+      - name: "Build get facet selectors"
+        run: "cargo build --release"
+
       - name: "Run the tests"
         run: "forge test"
 
